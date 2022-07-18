@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Enviroment>
+    <!-- Timeout -->
+    <TimeOut>5</TimeOut>
+
+    <!-- Web -->
+    <PlatformName>web</PlatformName>
+    <BrowserName>chrome</BrowserName>
+    <url>https://demoqa.com/</url>
+    <imageRepo>C:\\Users\\seliy\\IdeaProjects\\Final_Project\\ImageRepository\\</imageRepo>
+</Enviroment>
