@@ -11,16 +11,19 @@ import org.sikuli.script.Screen;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class CommonOps extends Base {
+
 
     public static String getData(String nodeName) {
         File file;
@@ -100,8 +103,26 @@ public class CommonOps extends Base {
 //        driver.quit();
 //    }
 
-//    @AfterMethod
-//    public void afterMethod() {
+    @BeforeMethod
+    public void beforeMethod(Method method) {
+
+        // Start recording video at every test start
+        try {
+            MonteScreenRecorder.startRecord(method.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+
+        // Stop recording video after test finished
+        try {
+            MonteScreenRecorder.stopRecord();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //        driver.get(getData("url"));
-//    }
+    }
 }

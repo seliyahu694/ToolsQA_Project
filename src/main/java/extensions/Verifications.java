@@ -17,7 +17,7 @@ public class Verifications extends CommonOps {
      *
      * Verify if specific text is the text in element
      *
-     * @param webElement = element to check the text in
+     * @param webElement = element to check the text on
      * @param expectedText = the expected text to be in element
      *
      */
@@ -39,13 +39,19 @@ public class Verifications extends CommonOps {
     public static void verifyInputOutputTexts(List<WebElement> inputWebElement, List<WebElement> outputWebElement) {
         for (int i = 0; i < inputWebElement.size(); i++) {
             UIActions.highLighterMethod(inputWebElement.get(i));
-            UIActions.highLighterMethod(outputWebElement.get(i));
             UIActions.scrollToElement(outputWebElement.get(i));
-            softAssert.assertEquals(UIActions.getNewSubStringFromElement(outputWebElement.get(i), ':'), UIActions.getTextFromElement(inputWebElement.get(i)));
+            UIActions.highLighterMethod(outputWebElement.get(i));
+            softAssert.assertNotEquals(UIActions.getNewSubStringFromElement(outputWebElement.get(i), ':'), UIActions.getTextFromElement(inputWebElement.get(i)));
         }
         softAssert.assertAll();
     }
 
+    /**
+     *
+     * Check site logo from existing image (using Sikuli)
+     *
+     * @param expectedImageName = image name from ImageRepository folder
+     */
     @Step("Verify visual Site Header")
     public static void visualSiteHeader(String expectedImageName) {
         try {

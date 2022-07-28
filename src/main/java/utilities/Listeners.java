@@ -9,6 +9,7 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Listeners extends CommonOps implements ITestListener {
 
@@ -37,6 +38,13 @@ public class Listeners extends CommonOps implements ITestListener {
      */
     public void onTestStart(ITestResult test) {
         System.out.println("----------     Starting Test: " + test.getName() + "     ----------");
+
+        // Start recording video at every test start
+        try {
+            MonteScreenRecorder.startRecord(test.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -44,6 +52,17 @@ public class Listeners extends CommonOps implements ITestListener {
      *
      */
     public void onTestSuccess(ITestResult test) {
+        // Delete the file Video from local directory after test passed
+        try {
+            File file = new File("./test-recordings/" + test.getName() + ".avi");
+            if (file.delete())
+                System.out.println("----------     File deleted successfully     ----------");
+            else
+                System.out.println("----------     Failed to delete file     ----------");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         System.out.println("----------     Test: " + test.getName() + " Passed     ----------");
     }
 
@@ -52,9 +71,20 @@ public class Listeners extends CommonOps implements ITestListener {
      *
      */
     public void onTestFailure(ITestResult test) {
+        // Save Screenshot in local folder
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File file = ts.getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(file, new File("./ScreenShots/" + test.getName() + ".jpg"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        // Take ScreenShot for report
         saveScreenshot();
+
         System.out.println("----------     Test: " + test.getName() + " Failed     ----------");
-        saveScreenshot();
     }
 
     /**

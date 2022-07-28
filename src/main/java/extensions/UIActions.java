@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utilities.CommonOps;
 
+import java.time.Duration;
+
 public class UIActions extends CommonOps {
 
     /**
@@ -360,6 +362,8 @@ public class UIActions extends CommonOps {
 
     /**
      *
+     * Send text to element
+     *
      * @param webElement = The element to send text to
      * @param text = The text to sent to element
      */
@@ -371,6 +375,28 @@ public class UIActions extends CommonOps {
             highLighterMethod(webElement);
             webElement.clear();
             webElement.sendKeys(text);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    /**
+     *
+     * Send text to element as human (slow typing)
+     *
+     * @param webElement = The element to send text to
+     * @param text = The text to sent to element
+     */
+    @Step("set Text As Human")
+    public static void setTextAsHuman(WebElement webElement, String text) {
+        try {
+            waitForElementExist(webElement);
+            scrollToElement(webElement);
+            highLighterMethod(webElement);
+            webElement.clear();
+            for (char ch : text.toCharArray()){
+                wait.withTimeout(Duration.ofMillis(500));
+            }
         } catch (Exception e) {
             e.getMessage();
         }
