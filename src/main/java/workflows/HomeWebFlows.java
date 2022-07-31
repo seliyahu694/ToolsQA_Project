@@ -1,9 +1,12 @@
 package workflows;
 
 import extensions.UIActions;
+import io.qameta.allure.Step;
 import utilities.CommonOps;
 
 public class HomeWebFlows extends CommonOps {
+
+    @Step("go To Page")
     public static void goToPage(String pageName) {
         switch (pageName) {
             case "Elements":

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utilities.CommonOps;
+import workflows.CheckBoxWebFlows;
 import workflows.HomeWebFlows;
 import workflows.ElementsWebFlows;
 import workflows.MenuWebFlows;
@@ -48,5 +49,14 @@ public class ToolsQAElements extends CommonOps {
     public void test05_VerifyCheckBoxSection() {
         MenuWebFlows.goToSubjectInMenu("Check Box");
         Verifications.verifyTextInElement(toolsQAElementsPage.header, "Check Box");
+    }
+
+    @Test (description = "Test06 - Check Check Box")
+    @Description("This test open the folders and checks check box")
+    public void test06_CheckCheckBox() {
+        test02_VerifyElementsPage();
+        test05_VerifyCheckBoxSection();
+        CheckBoxWebFlows.checkCheckBox("WorkSpace");
+       Verifications.verifyCheckedCheckBox("WorkSpace");
     }
 }

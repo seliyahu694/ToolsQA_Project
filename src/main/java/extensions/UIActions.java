@@ -8,15 +8,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import utilities.CommonOps;
 
 import java.time.Duration;
+import java.util.Locale;
 
 public class UIActions extends CommonOps {
 
     /**
-     *
      * Click on element
      *
      * @param webElement = the element to click
-     * @return true if webElement is selected, false otherwise
+     * @return true if webElement was clicked, false otherwise
      */
     @Step("click On Element")
     public static boolean clickOnElement(WebElement webElement) {
@@ -25,6 +25,25 @@ public class UIActions extends CommonOps {
             highLighterMethod(webElement);
             webElement.click();
             return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param webElement = element to check if selected
+     * @return true if webElement is selected, false otherwise
+     */
+    @Step("is Element Selected")
+    public static boolean isElementSelected(WebElement webElement) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+            if (webElement.isSelected()){
+                highLighterMethod(webElement);
+                return true;
+            }
+            else
+                return false;
         } catch (Exception e) {
             return false;
         }
@@ -49,8 +68,7 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
-     * @param locator = how to find the WebElement
+     * @param locator     = how to find the WebElement
      * @param locatorText = locator string
      * @return element
      */
@@ -59,7 +77,7 @@ public class UIActions extends CommonOps {
         WebElement webElement = null;
 
         try {
-            switch(locator) {
+            switch (locator) {
                 case "id":
                     webElement = getDriver().findElement(By.id(locatorText));
                     break;
@@ -89,7 +107,6 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Finds element by id
      *
      * @param byId = id string
@@ -106,7 +123,6 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Finds element by xpath
      *
      * @param byXpath = xpath string
@@ -123,7 +139,6 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Finds element by name
      *
      * @param byName = name string
@@ -140,7 +155,6 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Finds element by css
      *
      * @param byCss = css string
@@ -157,7 +171,6 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Finds element by link text
      *
      * @param byLinkText = link text string
@@ -174,7 +187,6 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Finds element by class name
      *
      * @param byClassName = class name string
@@ -191,7 +203,6 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Finds element by tag name
      *
      * @param byTagName = tag name string
@@ -213,26 +224,25 @@ public class UIActions extends CommonOps {
      * @param webElement = The element to wait for
      * @return true if the element is displayed and enabled, false otherwise
      */
-    @Step ("wait For Element Exist")
+    @Step("wait For Element Exist")
     public static boolean waitForElementExist(WebElement webElement) {
-            try {
-                if (isElementDisplayed(webElement) && isElementEnabled(webElement) && isElementVisible(webElement))
-                    return true;
-            } catch (Exception e) {
-                e.getMessage();
-            }
+        try {
+            if (isElementDisplayed(webElement) && isElementEnabled(webElement) && isElementVisible(webElement))
+                return true;
+        } catch (Exception e) {
+            e.getMessage();
+        }
         return false;
     }
 
     /**
-     *
      * Waiting for specific element to be visible
      *
      * @param webElement = the element to check if visible
      * @return true if webElement is visible, false otherwise
      */
     @Step("is Element Visible")
-    public static boolean isElementVisible(WebElement webElement){
+    public static boolean isElementVisible(WebElement webElement) {
         try {
             wait.until(ExpectedConditions.visibilityOf(webElement));
             return true;
@@ -248,7 +258,7 @@ public class UIActions extends CommonOps {
      * @param webElement
      * @return true if enabled, false otherwise
      */
-    @Step ("is Element Enabled")
+    @Step("is Element Enabled")
     public static boolean isElementEnabled(WebElement webElement) {
         try {
             if (webElement.isEnabled())
@@ -266,7 +276,7 @@ public class UIActions extends CommonOps {
      * @param webElement
      * @return true if displayed, false otherwise
      */
-    @Step ("is Element Displayed")
+    @Step("is Element Displayed")
     public static boolean isElementDisplayed(WebElement webElement) {
         try {
             if (webElement.isDisplayed())
@@ -297,7 +307,6 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Get text from element
      *
      * @param webElement = The element to get text from
@@ -318,6 +327,11 @@ public class UIActions extends CommonOps {
             e.getMessage();
         }
         return elementText;
+    }
+
+    public static String getTextFromElementToLowerCase(WebElement webElement) {
+        String elementText = getTextFromElement(webElement);
+        return elementText.toLowerCase();
     }
 
     /**
@@ -343,10 +357,9 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Get new sub string from element text starting from specific index of char + 1
      *
-     * @param webElement = the element to get the text from
+     * @param webElement           = the element to get the text from
      * @param charToStartNewString = the char to take the new string from
      * @return
      */
@@ -361,11 +374,10 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Send text to element
      *
      * @param webElement = The element to send text to
-     * @param text = The text to sent to element
+     * @param text       = The text to sent to element
      */
     @Step("set Text")
     public static void setText(WebElement webElement, String text) {
@@ -381,11 +393,10 @@ public class UIActions extends CommonOps {
     }
 
     /**
-     *
      * Send text to element as human (slow typing)
      *
      * @param webElement = The element to send text to
-     * @param text = The text to sent to element
+     * @param text       = The text to sent to element
      */
     @Step("set Text As Human")
     public static void setTextAsHuman(WebElement webElement, String text) {
@@ -394,7 +405,7 @@ public class UIActions extends CommonOps {
             scrollToElement(webElement);
             highLighterMethod(webElement);
             webElement.clear();
-            for (char ch : text.toCharArray()){
+            for (char ch : text.toCharArray()) {
                 wait.withTimeout(Duration.ofMillis(500));
             }
         } catch (Exception e) {

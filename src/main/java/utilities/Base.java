@@ -19,4 +19,5 @@ public class Base {
     protected static pageObjects.toolsqa.MenuPage toolsQAMenuPage;
     protected static pageObjects.toolsqa.ElementsPage toolsQAElementsPage;
     protected static pageObjects.toolsqa.FormsPage toolsQAFormsPage;
+    protected static pageObjects.toolsqa.CheckBoxPage toolsQACheckBoxPage;
 }

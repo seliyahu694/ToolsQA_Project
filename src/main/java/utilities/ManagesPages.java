@@ -9,5 +9,6 @@ public class ManagesPages extends Base {
         toolsQAMenuPage = PageFactory.initElements(driver, pageObjects.toolsqa.MenuPage.class);
         toolsQAElementsPage = PageFactory.initElements(driver, pageObjects.toolsqa.ElementsPage.class);
         toolsQAFormsPage = PageFactory.initElements(driver, pageObjects.toolsqa.FormsPage.class);
+        toolsQACheckBoxPage = PageFactory.initElements(driver, pageObjects.toolsqa.CheckBoxPage.class);
     }
 }

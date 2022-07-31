@@ -7,7 +7,7 @@ import java.util.List;
 
 public class HomePage {
 
-    @FindBy(css=".card.mt-4.top-card")
+    @FindBy(css = ".card.mt-4.top-card")
     public List<WebElement> subjectBtns;
 
 
