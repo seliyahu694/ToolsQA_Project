@@ -20,4 +20,7 @@ public class Base {
     protected static pageObjects.toolsqa.ElementsPage toolsQAElementsPage;
     protected static pageObjects.toolsqa.FormsPage toolsQAFormsPage;
     protected static pageObjects.toolsqa.CheckBoxPage toolsQACheckBoxPage;
+    protected static pageObjects.toolsqa.RadioButtonPage toolsQARadioButtonPage;
+    protected static pageObjects.toolsqa.WebTablesPage toolsQAWebTablesPage;
+    protected static pageObjects.toolsqa.ButtonsPage toolsQAButtonsPage;
 }

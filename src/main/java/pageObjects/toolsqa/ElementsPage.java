@@ -15,6 +15,7 @@ public class ElementsPage extends MenuPage {
     @FindBy(id = "userName")
     public WebElement fullNameTextBox;
 
+    // Form fields
     @FindBy(id = "userEmail")
     public WebElement emailTextBox;
 

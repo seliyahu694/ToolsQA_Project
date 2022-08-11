@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import utilities.CommonOps;
 
 import java.time.Duration;
@@ -31,18 +32,55 @@ public class UIActions extends CommonOps {
     }
 
     /**
+     * Double-Click on element
+     *
+     * @param webElement = the element to click
+     * @return true if webElement was double-clicked, false otherwise
+     */
+    @Step("double-Click On Element")
+    public static boolean doubleClickOnElement(WebElement webElement) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+            highLighterMethod(webElement);
+            action.doubleClick(webElement);
+            action.build().perform();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Right Click on element
+     *
+     * @param webElement = the element to click
+     * @return true if webElement was right-clicked, false otherwise
+     */
+    @Step("right Click On Element")
+    public static boolean rightClickOnElement(WebElement webElement) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+            highLighterMethod(webElement);
+            action.contextClick(webElement);
+            action.build().perform();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
      * @param webElement = element to check if selected
      * @return true if webElement is selected, false otherwise
      */
     @Step("is Element Selected")
     public static boolean isElementSelected(WebElement webElement) {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(webElement));
-            if (webElement.isSelected()){
+            waitForElementExist(webElement);
+            if (webElement.isSelected()) {
                 highLighterMethod(webElement);
                 return true;
-            }
-            else
+            } else
                 return false;
         } catch (Exception e) {
             return false;
@@ -407,7 +445,47 @@ public class UIActions extends CommonOps {
             webElement.clear();
             for (char ch : text.toCharArray()) {
                 wait.withTimeout(Duration.ofMillis(500));
+                webElement.sendKeys(ch + "");
             }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    @Step("select from drop down by visible text")
+    public static void selectByVisibleText(WebElement webElement, String text) {
+        try {
+            waitForElementExist(webElement);
+            scrollToElement(webElement);
+            highLighterMethod(webElement);
+            Select select = new Select(webElement);
+            select.selectByVisibleText(text);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    @Step("select from drop down by index")
+    public static void selectByIndex(WebElement webElement, int index) {
+        try {
+            waitForElementExist(webElement);
+            scrollToElement(webElement);
+            highLighterMethod(webElement);
+            Select select = new Select(webElement);
+            select.deselectByIndex(index);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    @Step("select from drop down by value")
+    public static void selectByValue(WebElement webElement, String value) {
+        try {
+            waitForElementExist(webElement);
+            scrollToElement(webElement);
+            highLighterMethod(webElement);
+            Select select = new Select(webElement);
+            select.selectByValue(value);
         } catch (Exception e) {
             e.getMessage();
         }

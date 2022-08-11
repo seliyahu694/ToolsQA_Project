@@ -9,9 +9,7 @@ import utilities.CommonOps;
 
 import java.util.List;
 
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.*;
 
 public class Verifications extends CommonOps {
 
@@ -63,15 +61,48 @@ public class Verifications extends CommonOps {
      *
      * Check if text of checked checkbox showed in output
      *
-     * @param checkBoxName = string of checked checkbox
      */
     @Step("verify Checked CheckBox")
-    public static void verifyCheckedCheckBox(String checkBoxName) {
+    public static void verifyCheckedCheckBox() {
         for (int i = 1; i < toolsQACheckBoxPage.checkBoxes.size(); i++) {
             if (UIActions.isElementSelected(toolsQACheckBoxPage.checkBoxes.get(i))) {
                 softAssert.assertEquals(UIActions.getTextFromElementToLowerCase(toolsQACheckBoxPage.checkedTextResult.get(i + 1)), UIActions.getTextFromElement(toolsQACheckBoxPage.checkBoxes.get(i)));
             }
         }
         softAssert.assertAll();
+    }
+
+    /**
+     * Verify selected radio button
+     */
+    @Step("verify Selected Radio Button")
+    public static void verifySelectedRadioButton() {
+        if (UIActions.isElementSelected(toolsQARadioButtonPage.radioButtons.get(0))) {
+            assertEquals(UIActions.getTextFromElement(toolsQARadioButtonPage.radioButtonsTexts.get(0)), "Yes");
+            assertEquals(UIActions.getTextFromElement(toolsQARadioButtonPage.outputOfElectedRadioButtonText), "Yes");
+        }
+        if (UIActions.isElementSelected(toolsQARadioButtonPage.radioButtons.get(1))) {
+            assertEquals(UIActions.getTextFromElement(toolsQARadioButtonPage.radioButtonsTexts.get(1)), "Impressive");
+            assertEquals(UIActions.getTextFromElement(toolsQARadioButtonPage.outputOfElectedRadioButtonText), "Impressive");
+        }
+    }
+
+    @Step("verify Table Size")
+    public static void verifyTableSize(int expectedRowsInTable) {
+        assertEquals(toolsQAWebTablesPage.filledTableRows.size(), expectedRowsInTable);
+    }
+
+    public static void verifyClickedButtons(String click) {
+        switch (click) {
+            case "doubleClick":
+                assertEquals(UIActions.getTextFromElement(toolsQAButtonsPage.doubleClickOutputMessage), "You have done a double click");
+                break;
+            case "rightClick":
+                assertEquals(UIActions.getTextFromElement(toolsQAButtonsPage.rightClickOutputMessage), "You have done a right click");
+                break;
+            case "click":
+                assertEquals(UIActions.getTextFromElement(toolsQAButtonsPage.clickMeOutputMessage), "You have done a dynamic click");
+                break;
+        }
     }
 }

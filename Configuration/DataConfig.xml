@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Enviroment>
     <!-- Timeout -->
-    <TimeOut>5</TimeOut>
+    <TimeOut>1</TimeOut>
 
     <!-- Web -->
     <PlatformName>web</PlatformName>
     <BrowserName>chrome</BrowserName>
     <url>https://demoqa.com/</url>
     <imageRepo>C:\\Users\\seliy\\IdeaProjects\\Final_Project\\ImageRepository\\</imageRepo>
+
+    <!-- Data Driven Testing -->
+    <DDTWebTablesFile>./DDTFiles/WebTablesDetails.csv</DDTWebTablesFile>
+    <DDTButtonsFile>./DDTFiles/ButtonsDetails.csv</DDTButtonsFile>
 </Enviroment>

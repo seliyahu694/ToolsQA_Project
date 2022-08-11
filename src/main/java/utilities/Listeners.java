@@ -52,6 +52,14 @@ public class Listeners extends CommonOps implements ITestListener {
      *
      */
     public void onTestSuccess(ITestResult test) {
+
+        // Stop video recording
+        try {
+            MonteScreenRecorder.stopRecord();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         // Delete the file Video from local directory after test passed
         try {
             File file = new File("./test-recordings/" + test.getName() + ".avi");
@@ -71,6 +79,13 @@ public class Listeners extends CommonOps implements ITestListener {
      *
      */
     public void onTestFailure(ITestResult test) {
+        // Stop video recording
+        try {
+            MonteScreenRecorder.stopRecord();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         // Save Screenshot in local folder
         TakesScreenshot ts = (TakesScreenshot) driver;
         File file = ts.getScreenshotAs(OutputType.FILE);

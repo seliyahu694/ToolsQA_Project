@@ -4,7 +4,7 @@ import extensions.UIActions;
 import io.qameta.allure.Step;
 import utilities.CommonOps;
 
-public class CheckBoxWebFlows extends CommonOps {
+public class CheckBoxWebFlow extends CommonOps {
 
     @Step("open Check Box Folder")
     private static void openCheckBoxFolder(String parentFolder) {
@@ -36,7 +36,7 @@ public class CheckBoxWebFlows extends CommonOps {
                 break;
             case "Downloads":
                 UIActions.clickOnElement(toolsQACheckBoxPage.checkBoxFolders.get(0));
-                UIActions.clickOnElement(toolsQACheckBoxPage.checkBoxFolders.get(5));
+                UIActions.clickOnElement(toolsQACheckBoxPage.checkBoxFolders.get(3));
                 break;
         }
     }
